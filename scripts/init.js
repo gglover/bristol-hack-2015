@@ -1,7 +1,9 @@
 GAME_VIEW.initialize();
+DISTANCE_VIEW.initialize();
 
 setInterval( function() { 
-	GAME_VIEW.render(); 
+	GAME_VIEW.render();
+	DISTANCE_VIEW.render();
 	GAME_MODEL.advanceShape();
 }, 100);
 

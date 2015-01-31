@@ -32,6 +32,9 @@ var GAME_VIEW = {
 	render: function() {
 		var ctx = GAME_VIEW.context;
 		var cvs = GAME_VIEW.canvas;
+
+		ctx.canvas.width  = window.innerWidth;
+  		ctx.canvas.height = window.innerHeight - 50;
 		
 		ctx.fillStyle = '#000000';
 		ctx.fillRect(0, 0, cvs.width, cvs.height);

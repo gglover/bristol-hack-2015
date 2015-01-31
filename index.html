@@ -13,25 +13,19 @@
 
 		<video autoplay></video>
 		<div id="message-overlay"></div>
-		<div id="header">
-			<h1>Human Tetris</h1>
-		</div>
+		<header>
+			Human Tetris
+		</header>
 
-		<div>
-			<canvas id="canvas" width="900" height="200"></canvas>
-		</div>
+		<canvas id="distance-canvas" width="900" height="60"></canvas>
 
-		<div>
-			<canvas id="game-canvas" width="1000" height="600"></canvas>
-		</div>
-		
+		<canvas id="game-canvas" width="1000" height="600"></canvas>
+
 	</body>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script src="scripts/game_view.js"></script>
 	<script src="scripts/game_model.js"></script>
-	<script src="WalkingGuy/requestAnimFrame.js"></script>
-	<script src="WalkingGuy/movement.js"></script>
-
+	<script src="scripts/distance_view.js"></script>
 	<script src="scripts/init.js"></script>
 </html>
