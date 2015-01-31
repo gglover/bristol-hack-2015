@@ -6,3 +6,7 @@ canvas {
 	margin: auto;
 	background-color: red;
 }
+
+video {
+	display: none;
+}

@@ -24,7 +24,9 @@ var GAME_VIEW = {
 		navigator.getUserMedia({video: true}, function(stream) {
 			GAME_VIEW.webcam.src = window.URL.createObjectURL(stream);
 			GAME_VIEW.localMediaStream = stream;
-		}, function() { console.error('failed.')} );
+
+			GAME_VIEW.beginCaptureBackground();
+		}, function() {} );
 	},
 
 	render: function() {
@@ -36,6 +38,8 @@ var GAME_VIEW = {
 
 		if (GAME_VIEW.localMediaStream) {
 			ctx.drawImage(GAME_VIEW.webcam, 0, 0, cvs.width, cvs.height);
+			var data = GAME_VIEW.context.getImageData(0, 0, GAME_VIEW.canvas.width, GAME_VIEW.canvas.height);
+			GAME_MODEL.lastBackground = data;
 		}
 
 		//Draw in advancing shape
@@ -53,6 +57,36 @@ var GAME_VIEW = {
 		//console.log('width: ' + GAME_VIEW._imageWidth());
 
 		ctx.drawImage(GAME_VIEW.shapeImage, xpos, ypos, GAME_VIEW._imageWidth(), GAME_VIEW._imageHeight());
+
+		var data = GAME_VIEW.context.getImageData(0, 0, GAME_VIEW.canvas.width, GAME_VIEW.canvas.height);
+		GAME_MODEL.lastShapeView = data;
+	},
+
+	beginCaptureBackground: function() {
+		var $overlay = $('#message-overlay');
+		$overlay.text('Please step out of the frame.');
+		setTimeout(function() { $overlay.text('5') }, 1000);
+		setTimeout(function() { $overlay.text('4') }, 2000);
+		setTimeout(function() { $overlay.text('3') }, 3000);
+		setTimeout(function() { $overlay.text('2') }, 4000);
+		setTimeout(function() { $overlay.text('1') }, 5000);
+		setTimeout(function() { 
+			$overlay.text('');
+			GAME_VIEW.captureBackground(); 
+		}, 6000);
+
+	},
+
+	captureBackground: function() {
+		GAME_VIEW.context.drawImage(GAME_VIEW.webcam, 0, 0); 
+    	//get the canvas data  
+    	var data = GAME_VIEW.context.getImageData(0, 0, GAME_VIEW.canvas.width, GAME_VIEW.canvas.height);
+		GAME_MODEL.initBackground = data;
+
+	},
+
+	detectCollision: function() {
+
 	},
 
 	_imageWidth: function() {
