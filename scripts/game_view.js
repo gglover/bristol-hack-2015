@@ -7,8 +7,8 @@ var GAME_VIEW = {
 	shapeImage: null,
 	localMediaStream: null,
 
-	SHAPE_MIN_WIDTH: 200,
-	SHAPE_MIN_HEIGHT: 300,
+	SHAPE_MIN_WIDTH: 300,
+	SHAPE_MIN_HEIGHT: 200,
 
 	initialize: function() {
 		this.canvas = document.getElementById('game-canvas');
