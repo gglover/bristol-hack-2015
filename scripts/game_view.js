@@ -7,8 +7,8 @@ var GAME_VIEW = {
 	shapeImage: null,
 	localMediaStream: null,
 
-	SHAPE_MIN_WIDTH: 300,
-	SHAPE_MIN_HEIGHT: 200,
+	SHAPE_MIN_WIDTH: window.innerWidth/1.4,
+	SHAPE_MIN_HEIGHT: (window.innerHeight - 50)/1.4,
 
 	initialize: function() {
 		this.canvas = document.getElementById('game-canvas');
@@ -49,6 +49,9 @@ var GAME_VIEW = {
 		var shapeToDraw = GAME_MODEL.getCurrentShape();
 		GAME_VIEW.shapeImage = new Image();
 		GAME_VIEW.shapeImage.src = shapeToDraw;
+		
+		GAME_VIEW.shapeImage.width = window.innerWidth;
+		GAME_VIEW.shapeImage.height = window.innerHeight - 50;
 
 		// Calculate size and position
 		var xpos = ((cvs.width - GAME_VIEW._imageWidth()) / 2);

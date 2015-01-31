@@ -4,8 +4,8 @@ var GAME_MODEL = {
 		'test_shape_5.png', 'test_shape_1.png', 'test_shape_2.png', 'test_shape_0.png'],
 
 	shapeIndex: 0,
-	distance: 10,
-	maxDistance: 10,
+	distance: 100,
+	maxDistance: 100,
 
 	initBackground: null,
 	lastBackground: null,
