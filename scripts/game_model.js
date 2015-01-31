@@ -13,9 +13,9 @@ var GAME_MODEL = {
 		if (GAME_MODEL.distance <= 0) {
 			GAME_MODEL.shapeIndex = (GAME_MODEL.shapeIndex + 1) % GAME_MODEL.shapes.length;
 			GAME_MODEL.distance = GAME_MODEL.maxDistance;
-			$(document).trigger('nextShape');
+			//$(document).trigger('nextShape');
 		} else {
-			$(document).trigger('advanceShape');
+			//$(document).trigger('advanceShape');
 		}
 	},
 
