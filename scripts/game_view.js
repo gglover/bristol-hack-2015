@@ -45,6 +45,9 @@ var GAME_VIEW = {
 			GAME_MODEL.lastBackground = data;
 		}
 
+		// Only display webcam data if background undetected
+		if (!GAME_MODEL.started) { return; }
+
 		//Draw in advancing shape
 		var shapeToDraw = GAME_MODEL.getCurrentShape();
 		GAME_VIEW.shapeImage = new Image();
@@ -53,11 +56,6 @@ var GAME_VIEW = {
 		// Calculate size and position
 		var xpos = ((cvs.width - GAME_VIEW._imageWidth()) / 2);
 		var ypos = ((cvs.height - GAME_VIEW._imageHeight()) / 2);
-
-		//console.log('xpos: ' + xpos);
-		//console.log('ypos: ' + ypos);
-		//console.log('height: ' + GAME_VIEW._imageHeight());
-		//console.log('width: ' + GAME_VIEW._imageWidth());
 
 		ctx.drawImage(GAME_VIEW.shapeImage, xpos, ypos, GAME_VIEW._imageWidth(), GAME_VIEW._imageHeight());
 
@@ -68,15 +66,16 @@ var GAME_VIEW = {
 	beginCaptureBackground: function() {
 		var $overlay = $('#message-overlay');
 		$overlay.text('Please step out of the frame.');
-		setTimeout(function() { $overlay.text('5') }, 1000);
-		setTimeout(function() { $overlay.text('4') }, 2000);
-		setTimeout(function() { $overlay.text('3') }, 3000);
-		setTimeout(function() { $overlay.text('2') }, 4000);
-		setTimeout(function() { $overlay.text('1') }, 5000);
+		setTimeout(function() { $overlay.text('5') }, 4000);
+		setTimeout(function() { $overlay.text('4') }, 5000);
+		setTimeout(function() { $overlay.text('3') }, 6000);
+		setTimeout(function() { $overlay.text('2') }, 7000);
+		setTimeout(function() { $overlay.text('1') }, 8000);
 		setTimeout(function() { 
 			$overlay.text('');
-			GAME_VIEW.captureBackground(); 
-		}, 6000);
+			GAME_VIEW.captureBackground();
+			GAME_MODEL.started = true;
+		}, 9000);
 
 	},
 
@@ -106,6 +105,4 @@ var GAME_VIEW = {
 				* (GAME_MODEL.distance / GAME_MODEL.maxDistance) 
 				+ GAME_VIEW.SHAPE_MIN_HEIGHT;
 	}	
-
-
 }
