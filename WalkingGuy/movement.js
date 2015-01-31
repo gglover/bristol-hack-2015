@@ -54,8 +54,8 @@ function reset() {
 function drawPlayer() {
   if (true) {
     move(0, true, false);
-    player.x += 0.1;
-    if (player.x > canvas.width + player.w + 0.1) {
+    player.x += 1;
+    if (player.x > canvas.width + player.w + 1) {
       player.x = -player.w;
     }
   }
@@ -74,7 +74,8 @@ function drawPlayer() {
     player.sx = player.start.leftX;
     reset();
   }
-  ctx.drawImage(character, player.sx, player.sy, player.w, player.h, player.x, player.y, player.w, player.h);
+  if( player.x < 730)
+  	ctx.drawImage(character, player.sx, player.sy, player.w, player.h, player.x, player.y, player.w, player.h);
 
 }
 

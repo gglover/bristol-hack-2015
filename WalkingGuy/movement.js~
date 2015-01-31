@@ -54,8 +54,8 @@ function reset() {
 function drawPlayer() {
   if (true) {
     move(0, true, false);
-    player.x += 0.1;
-    if (player.x > canvas.width + player.w + 0.1) {
+    player.x += 1;
+    if (player.x > canvas.width + player.w + 1) {
       player.x = -player.w;
     }
   }
@@ -74,7 +74,8 @@ function drawPlayer() {
     player.sx = player.start.leftX;
     reset();
   }
-  ctx.drawImage(character, player.sx, player.sy, player.w, player.h, player.x, player.y, player.w, player.h);
+  if( player.x < 720)
+  	ctx.drawImage(character, player.sx, player.sy, player.w, player.h, player.x, player.y, player.w, player.h);
 
 }
 
@@ -115,8 +116,8 @@ ctx.drawImage(character1, player.sx+100, player.sy+1, player.w+1, player.h+1, 80
 }
 
 function init() {
-  character.src = 'block.png';
-  character1.src = 'gb_walk.png';
+  character.src = 'WalkingGuy/block.png';
+  character1.src = 'WalkingGuy/gb_walk.png';
 
 
   window.addEventListener('keydown', keyDown, false);
