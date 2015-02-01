@@ -108,14 +108,12 @@ var GAME_VIEW = {
 					(Math.abs(bgData[i + 1] - pData[i + 1]) < 40) &&
 					(Math.abs(bgData[i + 2] - pData[i + 2]) < 40)) {
 				} else {
-					pData[i + 3] = 100;
+					pData[i] = 0.0;
 
 				}
 			}
 			return pData;
 	},
-	
-
 
 	detectCollision: function(pData) {
 			var width = GAME_MODEL.lastShapeView.width;
@@ -130,8 +128,7 @@ var GAME_VIEW = {
 					//GAME_VIEW.collisionImage[i / 4] = 0;
 				}
 			}
-			return GAME_MODEL.lastShapeView;
-
+			return GAME_MODEL.lastShapeView.data;
 	},
 
 	_imageWidth: function() {
