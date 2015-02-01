@@ -97,6 +97,12 @@ var GAME_VIEW = {
 		GAME_VIEW.context.drawImage(GAME_VIEW.webcam, 0, 0, GAME_VIEW.canvas.width, GAME_VIEW.canvas.height);
     	//get the canvas data
     	var data = GAME_VIEW.context.getImageData(0, 0, GAME_VIEW.canvas.width, GAME_VIEW.canvas.height);
+
+    	// flip data
+
+    	// draw image
+
+    	// getImage data again
 		return data;
 
 	},
@@ -141,7 +147,6 @@ var GAME_VIEW = {
 	},
 
 	showScore: function() {
-<<<<<<< HEAD
 		GAME_VIEW.flashMessage(1000, GAME_MODEL.getScore());
 		
 	},
@@ -149,10 +154,7 @@ var GAME_VIEW = {
 	flashMessage: function(time, message) {
 		$mo = $('#message-overlay');
 		$mo.show().text(message);
-=======
-		//debugger;
 		$('#message-overlay').text(GAME_MODEL.getScore());
->>>>>>> f41ca6cb0c250970cdf95f5dc4d95f712f75c29c
 		setTimeout(function() {
 			$mo.fadeOut(500);
 		}, time - 500);
