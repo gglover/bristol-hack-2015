@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>cool</title>
+		<meta charset="utf-8" />
+		<meta name="description" content="html5 version of the classic human tetris game"/>
+		<link rel="icon" type="image/png" href="favicon.png">
+		<link href="style.css" type="text/css" rel="stylesheet" />
+
+	</head>
+	<body>
+		<div id="header">
+		<h1>Human Tetris</h1>
+		</div>
+		<div>
+		<canvas id="canvas" width="900" height="200"></canvas>
+
+		<script src="requestAnimFrame.js"></script>
+		<script src="movement.js"></script>
+		</div>
+		<div>
+		<video autoplay display="none"></video>
+		<canvas id="game-canvas" width="1000" height="600"></canvas>
+		</div>
+	</body>
+
+	<script src="scripts/game_view.js"></script>
+	<script src="scripts/game_model.js"></script>
+	<script src="scripts/init.js"></script>
+</html>

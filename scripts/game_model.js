@@ -40,10 +40,10 @@ var GAME_MODEL = {
 	},
 
 	getScore: function() {
-		if (GAME_MODEL.collisionCount < 10) { return "PERFECT!"; }
-		else if (GAME_MODEL.collisionCount < 100) { return "GREAT"; } 
+		if (GAME_MODEL.collisionCount < 100) { return "PERFECT!"; }
+		else if (GAME_MODEL.collisionCount < 500) { return "GREAT"; } 
 		else if (GAME_MODEL.collisionCount < 3000) { return "GOOD"; }
-		else if (GAME_MODEL.collisionCount < 6000) { return "BOO"; } 
+		else if (GAME_MODEL.collisionCount < 20000) { return "BOO"; } 
 		else { return "MISS" } 
 	},
 
