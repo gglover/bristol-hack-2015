@@ -111,7 +111,9 @@ var GAME_VIEW = {
 					(Math.abs(bgData[i + 2] - pData[i + 2]) < 40)) {
 				} else {
 					pData[i + 3] = 100;
-
+					pData[i + 2] = 100;
+					pData[i + 1] = 100;
+					pData[i] = 100;
 				}
 			}
 			return pData;
@@ -122,7 +124,7 @@ var GAME_VIEW = {
 	detectCollision: function(pData) {
 			var ret = GAME_MODEL.lastShapeView;
 			for (var i = 0; i < ret.data.length; i += 4) {
-				if (pData[i + 3] < 255 && ret.data[i] == 255) {
+				if (pData[i + 3] == 100 && pData[i + 2] == 100 && pData[i + 1] == 100 && pData[i] == 100 && ret.data[i] == 255) {
 					ret.data[i] = 100;
 					GAME_MODEL.collisionCount++;
 				}
