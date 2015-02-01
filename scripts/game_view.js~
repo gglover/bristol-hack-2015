@@ -128,7 +128,7 @@ var GAME_VIEW = {
 					//GAME_VIEW.collisionImage[i / 4] = 0;
 				}
 			}
-			return GAME_MODEL.lastShapeView;
+			return GAME_MODEL.lastShapeView.data;
 	},
 
 	_imageWidth: function() {
