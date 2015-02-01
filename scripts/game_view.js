@@ -142,7 +142,7 @@ var GAME_VIEW = {
 					GAME_MODEL.collisionCount++;
 				}
 			}
-			if((20 - Math.log(GAME_MODEL.collisionCount)) > 0) GAME_MODEL.score += parseInt((20 - Math.log(GAME_MODEL.collisionCount)) * 50);
+			//if((20 - Math.log(GAME_MODEL.collisionCount)) > 0) GAME_MODEL.score += parseInt((20 - Math.log(GAME_MODEL.collisionCount)) * 50);
 			return ret;
 	},
 
