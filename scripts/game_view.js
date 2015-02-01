@@ -14,6 +14,9 @@ var GAME_VIEW = {
 		this.canvas = document.getElementById('game-canvas');
 		this.context = this.canvas.getContext('2d');
 
+		this.canvas.width  = $(window).width();
+  		this.canvas.height = $(window).height() - 50;
+
 		// Setup webcam
 		navigator.getUserMedia  = navigator.getUserMedia ||
                           navigator.webkitGetUserMedia ||
@@ -32,9 +35,6 @@ var GAME_VIEW = {
 	render: function() {
 		var ctx = GAME_VIEW.context;
 		var cvs = GAME_VIEW.canvas;
-
-		ctx.canvas.width  = window.innerWidth;
-  		ctx.canvas.height = window.innerHeight - 50;
 
 		ctx.fillStyle = '#000000';
 		ctx.fillRect(0, 0, cvs.width, cvs.height);
@@ -67,7 +67,6 @@ var GAME_VIEW = {
 		var data = GAME_VIEW.context.getImageData(0, 0, GAME_VIEW.canvas.width, GAME_VIEW.canvas.height);
 		GAME_MODEL.lastShapeView = data;
 
-		//var data1 = GAME_VIEW.detectCollision(personMask);
 		if (GAME_MODEL.distance == 1) {
 			ctx.putImageData(GAME_VIEW.detectCollision(personMask), 0, 0);
 		}
@@ -91,9 +90,9 @@ var GAME_VIEW = {
 	},
 
 	captureBackground: function() {
-		GAME_VIEW.context.drawImage(GAME_VIEW.webcam, 0, 0, window.innerWidth, window.innerHeight);
+		GAME_VIEW.context.drawImage(GAME_VIEW.webcam, 0, 0, GAME_VIEW.canvas.width, GAME_VIEW.canvas.height);
     	//get the canvas data
-    	var data = GAME_VIEW.context.getImageData(0, 0, window.innerWidth, window.innerHeight);
+    	var data = GAME_VIEW.context.getImageData(0, 0, GAME_VIEW.canvas.width, GAME_VIEW.canvas.height);
 		return data;
 
 	},
@@ -111,7 +110,9 @@ var GAME_VIEW = {
 					(Math.abs(bgData[i + 2] - pData[i + 2]) < 40)) {
 				} else {
 					pData[i + 3] = 100;
-
+					pData[i + 2] = 100;
+					pData[i + 1] = 100;
+					pData[i] = 100;
 				}
 			}
 			return pData;
@@ -122,7 +123,7 @@ var GAME_VIEW = {
 	detectCollision: function(pData) {
 			var ret = GAME_MODEL.lastShapeView;
 			for (var i = 0; i < ret.data.length; i += 4) {
-				if (pData[i + 3] < 255 && ret.data[i] == 255) {
+				if (pData[i + 3] == 100 && pData[i + 2] == 100 && pData[i + 1] == 100 && pData[i] == 100 && ret.data[i] == 255) {
 					ret.data[i] = 100;
 					GAME_MODEL.collisionCount++;
 				}
