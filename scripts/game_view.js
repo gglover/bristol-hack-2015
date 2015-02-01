@@ -106,11 +106,14 @@ var GAME_VIEW = {
 			var height = GAME_MODEL.initBackground.height;
 
 			for (var i = 0; i < bgData.length; i += 4) {
-				if ((Math.abs(bgData[i] - pData[i]) < 40) &&
-					(Math.abs(bgData[i + 1] - pData[i + 1]) < 40) &&
-					(Math.abs(bgData[i + 2] - pData[i + 2]) < 40)) {
+				if ((Math.abs(bgData[i] - pData[i]) < 30) &&
+					(Math.abs(bgData[i + 1] - pData[i + 1]) < 30) &&
+					(Math.abs(bgData[i + 2] - pData[i + 2]) < 30)) {
 				} else {
-					pData[i + 3] = 100;
+					pData[i + 3] = 240;
+					pData[i] = 0;
+					//pData[i+1] = 0;
+					//pData[i+2] = 0;
 
 				}
 			}
@@ -123,7 +126,9 @@ var GAME_VIEW = {
 			var ret = GAME_MODEL.lastShapeView;
 			for (var i = 0; i < ret.data.length; i += 4) {
 				if (pData[i + 3] < 255 && ret.data[i] == 255) {
-					ret.data[i] = 100;
+					ret.data[i] = 255;
+					ret.data[i+1] = 0;
+					ret.data[i+2] = 0;
 					GAME_MODEL.collisionCount++;
 				}
 			}
