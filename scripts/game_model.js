@@ -40,11 +40,26 @@ var GAME_MODEL = {
 	},
 
 	getScore: function() {
-		if (GAME_MODEL.collisionCount < 10) { return "PERFECT!"; }
-		else if (GAME_MODEL.collisionCount < 100) { return "GREAT"; } 
-		else if (GAME_MODEL.collisionCount < 3000) { return "GOOD"; }
-		else if (GAME_MODEL.collisionCount < 6000) { return "BOO"; } 
-		else { return "MISS" } 
+		if (GAME_MODEL.collisionCount < 100) { 
+			GAME_MODEL.score += 5;
+			return "PERFECT!"; 
+		}
+		else if (GAME_MODEL.collisionCount < 500) { 
+			GAME_MODEL.score += 3;
+			return "GREAT"; 
+		} 
+		else if (GAME_MODEL.collisionCount < 3000) { 
+			GAME_MODEL.score += 2;
+			return "GOOD"; 
+		}
+		else if (GAME_MODEL.collisionCount < 50000) { 
+			GAME_MODEL.score += 0
+			return "BOO"; 
+		} 
+		else { 
+			GAME_MODEL.score -= 5
+			return "MISS" 
+		} 
 	},
 
 	missedLastShape: function() {
