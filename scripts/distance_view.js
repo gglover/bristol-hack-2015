@@ -4,7 +4,7 @@ var DISTANCE_VIEW = {
 	context: null,
 	person: null,
 
-	PERSON_PADDING: 40,
+	PERSON_PADDING: 80,
 	
 	initialize: function() {
 		this.canvas = document.getElementById('distance-canvas');
@@ -23,7 +23,7 @@ var DISTANCE_VIEW = {
 		ctx.drawImage(DISTANCE_VIEW.person, cvs.width - DISTANCE_VIEW.PERSON_PADDING, 10);
 
 		ctx.fillStyle = '#000000';
-		var xpos = cvs.width - (cvs.width * (GAME_MODEL.distance / GAME_MODEL.maxDistance)) + DISTANCE_VIEW.PERSON_PADDING;
+		var xpos = cvs.width - (cvs.width * (GAME_MODEL.distance / GAME_MODEL.maxDistance)) - DISTANCE_VIEW.PERSON_PADDING / 2;
 		ctx.fillRect(xpos, 0, 40, cvs.height);
 
 	},

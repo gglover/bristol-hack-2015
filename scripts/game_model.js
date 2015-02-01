@@ -10,6 +10,7 @@ var GAME_MODEL = {
 	shapeIndex: 0,
 	distance: 100,
 	maxDistance: 100,
+	missedShape: false,
 
 	initBackground: null,
 	lastBackground: null,

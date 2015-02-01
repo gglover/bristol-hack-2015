@@ -107,14 +107,14 @@ var GAME_VIEW = {
 					(Math.abs(bgData[i + 1] - pData[i + 1]) < 15) && 
 					(Math.abs(bgData[i + 2] - pData[i + 2]) < 15)) {
 				} else {
-					pData[i + 4] = 100;
+					pData[i + 3] = 100;
 
 				}
 			}
 			return pData;
 	},
 	
-	/*detectCollision: function(peopleImage, blockImage) {
+	detectCollision: function(peopleImage, blockImage) {
 			var width = blockImage.width;
 			var height = blockImage.height;
 			GAME_VIEW.collisionImage = new Array(blockImage.length / 4);
@@ -128,7 +128,7 @@ var GAME_VIEW = {
 				}
 			}
 			return GAME_VIEW.collisionImage;
-	},*/
+	},
 
 	_imageWidth: function() {
 				// Take difference between largest and smallest size
