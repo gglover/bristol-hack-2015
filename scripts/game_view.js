@@ -49,7 +49,7 @@ var GAME_VIEW = {
 		// Get bitmask of person's position against background
 		var personMask = GAME_VIEW.detectPeople();
 		ctx.putImageData(GAME_MODEL.lastBackground, 0, 0);
-
+		
 		//Draw in advancing shape
 		var shapeToDraw = GAME_MODEL.getCurrentShape();
 		GAME_VIEW.shapeImage = new Image();
@@ -63,6 +63,10 @@ var GAME_VIEW = {
 		var ypos = ((cvs.height - GAME_VIEW._imageHeight()) / 2);
 
 		ctx.drawImage(GAME_VIEW.shapeImage, xpos, ypos, GAME_VIEW._imageWidth(), GAME_VIEW._imageHeight());
+		
+		var showScore = "Score : " + GAME_MODEL.score;
+		ctx.font = "40px Calibri";
+		ctx.fillText(showScore, 25, 50);
 
 		var data = GAME_VIEW.context.getImageData(0, 0, GAME_VIEW.canvas.width, GAME_VIEW.canvas.height);
 		GAME_MODEL.lastShapeView = data;
@@ -105,14 +109,15 @@ var GAME_VIEW = {
 			var height = GAME_MODEL.initBackground.height;
 
 			for (var i = 0; i < bgData.length; i += 4) {
-				if ((Math.abs(bgData[i] - pData[i]) < 40) &&
-					(Math.abs(bgData[i + 1] - pData[i + 1]) < 40) &&
-					(Math.abs(bgData[i + 2] - pData[i + 2]) < 40)) {
+				if ((Math.abs(bgData[i] - pData[i]) < 30) &&
+					(Math.abs(bgData[i + 1] - pData[i + 1]) < 30) &&
+					(Math.abs(bgData[i + 2] - pData[i + 2]) < 30)) {
 				} else {
-					pData[i + 3] = 100;
-					pData[i + 2] = 100;
-					pData[i + 1] = 100;
-					pData[i] = 100;
+					pData[i + 3] = 240;
+					pData[i] = 0;
+					//pData[i+1] = 0;
+					//pData[i+2] = 0;
+
 				}
 			}
 			return pData;
@@ -123,16 +128,20 @@ var GAME_VIEW = {
 	detectCollision: function(pData) {
 			var ret = GAME_MODEL.lastShapeView;
 			for (var i = 0; i < ret.data.length; i += 4) {
-				if (pData[i + 3] == 100 && pData[i + 2] == 100 && pData[i + 1] == 100 && pData[i] == 100 && ret.data[i] == 255) {
-					ret.data[i] = 100;
+				if (pData[i + 3] < 255 && ret.data[i] == 255) {
+					ret.data[i] = 255;
+					ret.data[i+1] = 0;
+					ret.data[i+2] = 0;
+
 					GAME_MODEL.collisionCount++;
 				}
 			}
+			if((20 - Math.log(GAME_MODEL.collisionCount)) > 0) GAME_MODEL.score += parseInt((20 - Math.log(GAME_MODEL.collisionCount)) * 50);
 			return ret;
-
 	},
 
 	showScore: function() {
+<<<<<<< HEAD
 		GAME_VIEW.flashMessage(1000, GAME_MODEL.getScore());
 		
 	},
@@ -140,6 +149,10 @@ var GAME_VIEW = {
 	flashMessage: function(time, message) {
 		$mo = $('#message-overlay');
 		$mo.show().text(message);
+=======
+		//debugger;
+		$('#message-overlay').text(GAME_MODEL.getScore());
+>>>>>>> f41ca6cb0c250970cdf95f5dc4d95f712f75c29c
 		setTimeout(function() {
 			$mo.fadeOut(500);
 		}, time - 500);
