@@ -76,16 +76,16 @@ var GAME_VIEW = {
 
 	beginCaptureBackground: function() {
 		var $overlay = $('#message-overlay');
-		$overlay.text('Please step out of the frame.');
-		//setTimeout(function() { $overlay.text('5') }, 4000);
-		//setTimeout(function() { $overlay.text('4') }, 5000);
-		//setTimeout(function() { $overlay.text('3') }, 6000);
-		//setTimeout(function() { $overlay.text('2') }, 7000);
-		//setTimeout(function() { $overlay.text('1') }, 8000);
+		GAME_VIEW.flashMessage('Please step out of the frame.', 3000);
+		//setTimeout(function() { GAME_VIEW.flashMessage('5', 1000); }, 4000);
+		//setTimeout(function() { GAME_VIEW.flashMessage('4', 1000); }, 5000);
+		//setTimeout(function() { GAME_VIEW.flashMessage('3', 1000); }, 6000);
+		//setTimeout(function() { GAME_VIEW.flashMessage('2', 1000); }, 7000);
+		//setTimeout(function() { GAME_VIEW.flashMessage('1', 1000); }, 8000);
 		setTimeout(function() {
-			$overlay.text('');
 			GAME_MODEL.initBackground = GAME_VIEW.captureBackground();
 			GAME_MODEL.started = true;
+			GAME_MODEL.start();
 		}, 5000);
 
 	},
@@ -132,11 +132,16 @@ var GAME_VIEW = {
 	},
 
 	showScore: function() {
-		debugger;
-		$('#message-overlay').text(GAME_MODEL.getScore());
+		GAME_VIEW.flashMessage(1000, GAME_MODEL.getScore());
+		
+	},
+
+	flashMessage: function(time, message) {
+		$mo = $('#message-overlay');
+		$mo.show().text(message);
 		setTimeout(function() {
-			$('#message-overlay').text('');
-		}, 1500);
+			$mo.fadeOut(500);
+		}, time - 500);
 	},
 
 	_imageWidth: function() {

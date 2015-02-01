@@ -1,13 +1,16 @@
 body {
 	margin: 0px;
 	font-family: 'Helvetica Neue', Helvetica;
+	color: #524a41;
 }
 
 header {
-	width: 30%;
 	float: left;
+	width: 100%;
 	margin: 0px;
 	font-size: 40px;
+	background-color: #ffeeac;
+	border-bottom: solid 10px #524a41;
 }
 
 #game-canvas {
@@ -17,7 +20,7 @@ header {
 #distance-canvas {
 	margin: auto;
 	width: 65%;
-	margin-right: 10px;
+	margin-right: 10%;
 }
 
 header, #distance-canvas {
@@ -34,6 +37,7 @@ video {
 	width: 100%;
 	font-weight: bold;
 	font-size: 60px;
-	color: red;
+	color: #de4a4a;
 	text-align: center;
+	background-color: rgba(0,0,0,0.3);
 }

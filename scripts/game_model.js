@@ -10,12 +10,16 @@ var GAME_MODEL = {
 	shapeIndex: 0,
 	distance: 100,
 	maxDistance: 100,
-	missedShape: false,
 
 	initBackground: null,
 	lastBackground: null,
 	lastShapeView: null,
 	collisionCount: 0,
+
+	start: function() {
+		GAME_MODEL.started = true;
+		$(document).trigger('started');
+	},
 
 	advanceShape: function() {
 		GAME_MODEL.distance--;
@@ -39,5 +43,11 @@ var GAME_MODEL = {
 		else if (GAME_MODEL.collisionCount < 6000) { return "BOO"; } 
 		else { return "MISS" } 
 	},
+
+	missedLastShape: function() {
+		return GAME_MODEL.collisionCount >= 6000;
+	}
+
+	
 
 } 
