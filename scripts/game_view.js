@@ -17,6 +17,10 @@ var GAME_VIEW = {
 		this.canvas.width  = $(window).width();
   		this.canvas.height = $(window).height() - 50;
 
+  		// flip data
+		GAME_VIEW.context.translate(GAME_VIEW.canvas.width, 0);
+		GAME_VIEW.context.scale(-1, 1);
+
 		// Setup webcam
 		navigator.getUserMedia  = navigator.getUserMedia ||
                           navigator.webkitGetUserMedia ||
@@ -33,6 +37,7 @@ var GAME_VIEW = {
 	},
 
 	render: function() {
+		debugger;
 		var ctx = GAME_VIEW.context;
 		var cvs = GAME_VIEW.canvas;
 
@@ -89,20 +94,6 @@ var GAME_VIEW = {
 
 	},
 
-	captureBackground: function() {
-		GAME_VIEW.context.drawImage(GAME_VIEW.webcam, 0, 0, GAME_VIEW.canvas.width, GAME_VIEW.canvas.height);
-    	//get the canvas data
-    	var data = GAME_VIEW.context.getImageData(0, 0, GAME_VIEW.canvas.width, GAME_VIEW.canvas.height);
-
-    	// flip data
-
-    	// draw image
-
-    	// getImage data again
-		return data;
-
-	},
-
 	detectPeople: function() {
 			var bgData = GAME_MODEL.initBackground.data;
 			var	pData = GAME_MODEL.lastBackground.data;
@@ -115,7 +106,7 @@ var GAME_VIEW = {
 					(Math.abs(bgData[i + 1] - pData[i + 1]) < 30) &&
 					(Math.abs(bgData[i + 2] - pData[i + 2]) < 30)) {
 				} else {
-					pData[i + 3] = 240;
+					pData[i + 3] = 200;
 					pData[i] = 0;
 					//pData[i+1] = 0;
 					//pData[i+2] = 0;
@@ -124,7 +115,6 @@ var GAME_VIEW = {
 			}
 			return pData;
 	},
-	
 
 
 	detectCollision: function(pData) {
@@ -138,19 +128,33 @@ var GAME_VIEW = {
 					GAME_MODEL.collisionCount++;
 				}
 			}
-			//if((20 - Math.log(GAME_MODEL.collisionCount)) > 0) GAME_MODEL.score += parseInt((20 - Math.log(GAME_MODEL.collisionCount)) * 50);
 			return ret;
 	},
 
+	captureBackground: function() {
+		GAME_VIEW.context.drawImage(GAME_VIEW.webcam, 0, 0, GAME_VIEW.canvas.width, GAME_VIEW.canvas.height);
+    	//get the canvas data
+    	//var data = GAME_VIEW.context.getImageData(0, 0, GAME_VIEW.canvas.width, GAME_VIEW.canvas.height);
+		//GAME_VIEW.context.drawImage(GAME_VIEW.webcam, 0, 0);
+
+    	// draw image
+		//GAME_VIEW.context.putImageData(ImageData, 0, 0);
+		
+    	// getImage data again
+		var data = GAME_VIEW.context.getImageData(0, 0, GAME_VIEW.canvas.width, GAME_VIEW.canvas.height);
+		return data;
+
+	},
+
 	showScore: function() {
-		GAME_VIEW.flashMessage(1000, GAME_MODEL.getScore());
+		GAME_VIEW.flashMessage(GAME_MODEL.getScore(), 1000);
+		$('#score-number').text(GAME_MODEL.score);
 		
 	},
 
-	flashMessage: function(time, message) {
+	flashMessage: function(message, time) {
 		$mo = $('#message-overlay');
 		$mo.show().text(message);
-		$('#message-overlay').text(GAME_MODEL.getScore());
 		setTimeout(function() {
 			$mo.fadeOut(500);
 		}, time - 500);

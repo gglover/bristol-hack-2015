@@ -31,6 +31,8 @@ header span {
 
 #game-canvas {
 	margin: auto;
+	background-image: url('misc_images/blocks.jpg');
+	background-repeat: repeat;
 }
 
 #distance-canvas {
