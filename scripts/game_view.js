@@ -49,7 +49,7 @@ var GAME_VIEW = {
 		// Get bitmask of person's position against background
 		var personMask = GAME_VIEW.detectPeople();
 		ctx.putImageData(GAME_MODEL.lastBackground, 0, 0);
-
+		
 		//Draw in advancing shape
 		var shapeToDraw = GAME_MODEL.getCurrentShape();
 		GAME_VIEW.shapeImage = new Image();
@@ -63,6 +63,10 @@ var GAME_VIEW = {
 		var ypos = ((cvs.height - GAME_VIEW._imageHeight()) / 2);
 
 		ctx.drawImage(GAME_VIEW.shapeImage, xpos, ypos, GAME_VIEW._imageWidth(), GAME_VIEW._imageHeight());
+		
+		var showScore = "Score : " + GAME_MODEL.score;
+		ctx.font = "40px Calibri";
+		ctx.fillText(showScore, 25, 50);
 
 		var data = GAME_VIEW.context.getImageData(0, 0, GAME_VIEW.canvas.width, GAME_VIEW.canvas.height);
 		GAME_MODEL.lastShapeView = data;
@@ -133,12 +137,12 @@ var GAME_VIEW = {
 					GAME_MODEL.collisionCount++;
 				}
 			}
+			if((20 - Math.log(GAME_MODEL.collisionCount)) > 0) GAME_MODEL.score += parseInt((20 - Math.log(GAME_MODEL.collisionCount)) * 50);
 			return ret;
-
 	},
 
 	showScore: function() {
-		debugger;
+		//debugger;
 		$('#message-overlay').text(GAME_MODEL.getScore());
 		setTimeout(function() {
 			$('#message-overlay').text('');

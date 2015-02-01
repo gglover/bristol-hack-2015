@@ -11,7 +11,8 @@ var GAME_MODEL = {
 	distance: 100,
 	maxDistance: 100,
 	missedShape: false,
-
+	score: 0,
+	
 	initBackground: null,
 	lastBackground: null,
 	lastShapeView: null,
