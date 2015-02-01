@@ -8,9 +8,25 @@ header {
 	float: left;
 	width: 100%;
 	margin: 0px;
-	font-size: 40px;
 	background-color: #ffeeac;
 	border-bottom: solid 10px #524a41;
+}
+
+header span {
+	font-size: 40px;
+}
+
+#score-box {
+	float: right;
+	width: 5%;
+	font-size: 20px;
+	text-align: center;
+	margin-top: 5px;
+}
+
+#score-number {
+	font-size: 20px;
+	color: #de4a4a;
 }
 
 #game-canvas {
@@ -21,6 +37,7 @@ header {
 	margin: auto;
 	width: 65%;
 	margin-right: 10%;
+	border-left: 10px solid #de4a4a;
 }
 
 header, #distance-canvas {
@@ -40,4 +57,15 @@ video {
 	color: #de4a4a;
 	text-align: center;
 	background-color: rgba(0,0,0,0.3);
+}
+
+#credits {
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+	background-color: rgba(0,0,0,0.3);
+	color: white;
+	margin: 0px;
+	padding: 3px;
+	font-size: 13px;
 }
