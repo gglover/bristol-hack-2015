@@ -15,6 +15,7 @@ var GAME_MODEL = {
 	initBackground: null,
 	lastBackground: null,
 	lastShapeView: null,
+	collisionCount: 0,
 
 	advanceShape: function() {
 		GAME_MODEL.distance--;
@@ -24,10 +25,19 @@ var GAME_MODEL = {
 			GAME_MODEL.distance = GAME_MODEL.maxDistance;
 			$(document).trigger('nextShape');
 		}
+		GAME_MODEL.collisionCount = 0;
 	},
 
 	getCurrentShape: function() {
 		return 'shapes/' + GAME_MODEL.shapes[GAME_MODEL.shapeIndex];
+	},
+
+	getScore: function() {
+		if (GAME_MODEL.collisionCount < 10) { return "PERFECT!"; }
+		else if (GAME_MODEL.collisionCount < 100) { return "GREAT"; } 
+		else if (GAME_MODEL.collisionCount < 3000) { return "GOOD"; }
+		else if (GAME_MODEL.collisionCount < 6000) { return "BOO"; } 
+		else { return "MISS" } 
 	},
 
 } 

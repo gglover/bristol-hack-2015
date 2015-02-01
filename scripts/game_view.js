@@ -68,13 +68,15 @@ var GAME_VIEW = {
 		GAME_MODEL.lastShapeView = data;
 
 		//var data1 = GAME_VIEW.detectCollision(personMask);
-		ctx.putImageData(GAME_VIEW.detectCollision(personMask), 0, 0);
+		if (GAME_MODEL.distance == 1) {
+			ctx.putImageData(GAME_VIEW.detectCollision(personMask), 0, 0);
+		}
 
 	},
 
 	beginCaptureBackground: function() {
 		var $overlay = $('#message-overlay');
-		//$overlay.text('Please step out of the frame.');
+		$overlay.text('Please step out of the frame.');
 		//setTimeout(function() { $overlay.text('5') }, 4000);
 		//setTimeout(function() { $overlay.text('4') }, 5000);
 		//setTimeout(function() { $overlay.text('3') }, 6000);
@@ -118,20 +120,23 @@ var GAME_VIEW = {
 
 
 	detectCollision: function(pData) {
-			var width = GAME_MODEL.lastShapeView.width;
-			var height = GAME_MODEL.lastShapeView.height;
-			//GAME_VIEW.collisionImage = new Array(blockImage.length / 4);
-			for (var i = 0; i < GAME_MODEL.lastShapeView.data.length; i += 4) {
-				if(pData[i] == 0 && GAME_MODEL.lastShapeView.data[i] == 255) {
-					GAME_MODEL.lastShapeView.data[i] = 100;
-					//GAME_VIEW.isCollision = true;
-				}
-				else {
-					//GAME_VIEW.collisionImage[i / 4] = 0;
+			var ret = GAME_MODEL.lastShapeView;
+			for (var i = 0; i < ret.data.length; i += 4) {
+				if (pData[i + 3] < 255 && ret.data[i] == 255) {
+					ret.data[i] = 100;
+					GAME_MODEL.collisionCount++;
 				}
 			}
-			return GAME_MODEL.lastShapeView;
+			return ret;
 
+	},
+
+	showScore: function() {
+		debugger;
+		$('#message-overlay').text(GAME_MODEL.getScore());
+		setTimeout(function() {
+			$('#message-overlay').text('');
+		}, 1500);
 	},
 
 	_imageWidth: function() {

@@ -4,9 +4,10 @@ setGameLoop();
 
 
 
-$(document).on('nextShape', function() {
+$(document).on('nextShape', function(count) {
 	clearInterval(gameLoop);
-	setTimeout(setGameLoop, 1000);
+	setTimeout(setGameLoop, 2000);
+	GAME_VIEW.showScore();
 });
 
 function setGameLoop() {
