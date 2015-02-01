@@ -40,13 +40,15 @@ var GAME_VIEW = {
 		ctx.fillRect(0, 0, cvs.width, cvs.height);
 
 		if (GAME_VIEW.localMediaStream) {
-			ctx.drawImage(GAME_VIEW.webcam, 0, 0, cvs.width, cvs.height);
-			var data = GAME_VIEW.context.getImageData(0, 0, GAME_VIEW.canvas.width, GAME_VIEW.canvas.height);
-			GAME_MODEL.lastBackground = data;
+			GAME_MODEL.lastBackground = GAME_VIEW.captureBackground();
 		}
 
 		// Only display webcam data if background undetected
 		if (!GAME_MODEL.started) { return; }
+
+		// Get bitmask of person's position against background
+		var personMask = GAME_VIEW.detectPeople();
+		ctx.putImageData(GAME_MODEL.lastBackground, 0, 0);
 
 		//Draw in advancing shape
 		var shapeToDraw = GAME_MODEL.getCurrentShape();
@@ -64,35 +66,69 @@ var GAME_VIEW = {
 
 		var data = GAME_VIEW.context.getImageData(0, 0, GAME_VIEW.canvas.width, GAME_VIEW.canvas.height);
 		GAME_MODEL.lastShapeView = data;
+
+		
+
 	},
 
 	beginCaptureBackground: function() {
 		var $overlay = $('#message-overlay');
-		$overlay.text('Please step out of the frame.');
-		setTimeout(function() { $overlay.text('5') }, 4000);
-		setTimeout(function() { $overlay.text('4') }, 5000);
-		setTimeout(function() { $overlay.text('3') }, 6000);
-		setTimeout(function() { $overlay.text('2') }, 7000);
-		setTimeout(function() { $overlay.text('1') }, 8000);
+		//$overlay.text('Please step out of the frame.');
+		//setTimeout(function() { $overlay.text('5') }, 4000);
+		//setTimeout(function() { $overlay.text('4') }, 5000);
+		//setTimeout(function() { $overlay.text('3') }, 6000);
+		//setTimeout(function() { $overlay.text('2') }, 7000);
+		//setTimeout(function() { $overlay.text('1') }, 8000);
 		setTimeout(function() { 
 			$overlay.text('');
-			GAME_VIEW.captureBackground();
+			GAME_MODEL.initBackground = GAME_VIEW.captureBackground();
 			GAME_MODEL.started = true;
-		}, 9000);
+		}, 5000);
 
 	},
 
 	captureBackground: function() {
-		GAME_VIEW.context.drawImage(GAME_VIEW.webcam, 0, 0); 
+		GAME_VIEW.context.drawImage(GAME_VIEW.webcam, 0, 0, window.innerWidth, window.innerHeight); 
     	//get the canvas data  
-    	var data = GAME_VIEW.context.getImageData(0, 0, GAME_VIEW.canvas.width, GAME_VIEW.canvas.height);
-		GAME_MODEL.initBackground = data;
+    	var data = GAME_VIEW.context.getImageData(0, 0, window.innerWidth, window.innerHeight);
+		return data;
 
 	},
 
-	detectCollision: function() {
+	detectPeople: function() {
+			var bgData = GAME_MODEL.initBackground.data;
+			var	pData = GAME_MODEL.lastBackground.data;
 
+			var width = GAME_MODEL.initBackground.width;
+			var height = GAME_MODEL.initBackground.height;
+
+			for (var i = 0; i < bgData.length; i += 4) {
+				if ((Math.abs(bgData[i] - pData[i]) < 15) && 
+					(Math.abs(bgData[i + 1] - pData[i + 1]) < 15) && 
+					(Math.abs(bgData[i + 2] - pData[i + 2]) < 15)) {
+				} else {
+					pData[i + 4] = 100;
+
+				}
+			}
+			return pData;
 	},
+	
+	/*detectCollision: function(peopleImage, blockImage) {
+			var width = blockImage.width;
+			var height = blockImage.height;
+			GAME_VIEW.collisionImage = new Array(blockImage.length / 4);
+			for (var i = 0; i < blockImage.length; i += 4) {
+				if(peopleImage[i / 4] == 255 && blockImage[i] == 'block') {
+					GAME_VIEW.collisionImage[i / 4] = 255;
+					GAME_VIEW.isCollision = true;
+				}
+				else {
+					GAME_VIEW.collisionImage[i / 4] = 0;
+				}
+			}
+			return GAME_VIEW.collisionImage;
+	},*/
 
 	_imageWidth: function() {
 				// Take difference between largest and smallest size
