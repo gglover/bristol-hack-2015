@@ -7,8 +7,8 @@ var GAME_VIEW = {
 	shapeImage: null,
 	localMediaStream: null,
 
-	SHAPE_MIN_WIDTH: window.innerWidth/1.4,
-	SHAPE_MIN_HEIGHT: (window.innerHeight - 50)/1.4,
+	SHAPE_MIN_WIDTH: window.innerWidth/1.2,
+	SHAPE_MIN_HEIGHT: (window.innerHeight - 20)/1.2,
 
 	initialize: function() {
 		this.canvas = document.getElementById('game-canvas');
@@ -61,7 +61,7 @@ var GAME_VIEW = {
 		GAME_VIEW.shapeImage.src = shapeToDraw;
 
 		GAME_VIEW.shapeImage.width = window.innerWidth;
-		GAME_VIEW.shapeImage.height = window.innerHeight - 50;
+		GAME_VIEW.shapeImage.height = window.innerHeight - 20;
 
 		// Calculate size and position
 		var xpos = ((cvs.width - GAME_VIEW._imageWidth()) / 2);
@@ -81,16 +81,14 @@ var GAME_VIEW = {
 	beginCaptureBackground: function() {
 		var $overlay = $('#message-overlay');
 		GAME_VIEW.flashMessage('Please step out of the frame.', 3000);
-		//setTimeout(function() { GAME_VIEW.flashMessage('5', 1000); }, 4000);
-		//setTimeout(function() { GAME_VIEW.flashMessage('4', 1000); }, 5000);
-		//setTimeout(function() { GAME_VIEW.flashMessage('3', 1000); }, 6000);
-		//setTimeout(function() { GAME_VIEW.flashMessage('2', 1000); }, 7000);
-		//setTimeout(function() { GAME_VIEW.flashMessage('1', 1000); }, 8000);
+		setTimeout(function() { GAME_VIEW.flashMessage('3', 500); }, 4000);
+		setTimeout(function() { GAME_VIEW.flashMessage('2', 500); }, 5000);
+		setTimeout(function() { GAME_VIEW.flashMessage('1', 500); }, 6000);
 		setTimeout(function() {
 			GAME_MODEL.initBackground = GAME_VIEW.captureBackground();
 			GAME_MODEL.started = true;
 			GAME_MODEL.start();
-		}, 5000);
+		}, 7000);
 
 	},
 
@@ -102,9 +100,9 @@ var GAME_VIEW = {
 			var height = GAME_MODEL.initBackground.height;
 
 			for (var i = 0; i < bgData.length; i += 4) {
-				if ((Math.abs(bgData[i] - pData[i]) < 30) &&
-					(Math.abs(bgData[i + 1] - pData[i + 1]) < 30) &&
-					(Math.abs(bgData[i + 2] - pData[i + 2]) < 30)) {
+				if ((Math.abs(bgData[i] - pData[i]) < 42) &&
+					(Math.abs(bgData[i + 1] - pData[i + 1]) < 42) &&
+					(Math.abs(bgData[i + 2] - pData[i + 2]) < 42)) {
 				} else {
 					pData[i + 3] = 200;
 					pData[i] = 0;
