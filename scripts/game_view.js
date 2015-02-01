@@ -129,6 +129,7 @@ var GAME_VIEW = {
 					ret.data[i] = 255;
 					ret.data[i+1] = 0;
 					ret.data[i+2] = 0;
+
 					GAME_MODEL.collisionCount++;
 				}
 			}
