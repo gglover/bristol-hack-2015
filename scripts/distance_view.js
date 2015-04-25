@@ -31,7 +31,7 @@ var DISTANCE_VIEW = {
 			ctx.fillStyle = '#524a41';
 		}
 		var xpos = cvs.width - (cvs.width * (GAME_MODEL.distance / GAME_MODEL.maxDistance)) - DISTANCE_VIEW.PERSON_PADDING / 1.8;
-		ctx.fillRect(xpos, 0, 45, cvs.height);
+		ctx.fillRect(xpos, 0, 30, cvs.height);
 
 	},
 }

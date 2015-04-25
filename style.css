@@ -31,14 +31,13 @@ header span {
 
 #game-canvas {
 	margin: auto;
-	background-image: url('misc_images/blocks.jpg');
-	background-repeat: repeat;
+	background: #D1FDF8;
 }
 
 #distance-canvas {
 	margin: auto;
-	width: 65%;
-	margin-right: 10%;
+	width: 60%;
+	margin-right: 8%;
 	border-left: 10px solid #de4a4a;
 }
 
